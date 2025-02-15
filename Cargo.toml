@@ -24,6 +24,7 @@ pinocchio-pubkey = { path = "sdk/pubkey", version = "0.2" }
 pinocchio-log-macro = { version = "0.3", path = "sdk/log/macro" }
 quote = "1.0"
 regex = "1"
+solana-define-syscall = "2.2"
 syn = "1.0"
 
 [workspace.metadata.cli]
@@ -34,3 +35,9 @@ build = "1.81.0"
 format = "nightly-2024-08-08"
 lint = "nightly-2024-08-08"
 test = "1.81.0"
+
+[workspace.lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = [
+    'cfg(target_os, values("solana"))',
+    'cfg(target_feature, values("static-syscalls"))',
+] }
