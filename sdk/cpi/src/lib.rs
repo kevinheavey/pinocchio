@@ -272,7 +272,7 @@ pub fn get_return_data() -> Option<ReturnData> {
         let mut program_id = Pubkey::default();
 
         let size = unsafe {
-            solana_define_syscall::definitions::sol_get_return_data(
+            pinocchio::syscalls::sol_get_return_data(
                 data.as_mut_ptr() as *mut u8,
                 data.len() as u64,
                 &mut program_id,
