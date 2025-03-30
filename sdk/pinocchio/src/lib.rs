@@ -234,22 +234,9 @@ pub mod program {
     pub use crate::cpi::*;
 }
 pub mod program_error;
-pub mod pubkey {
-    pub use solana_pubkey::*;
-/// Log a `Pubkey` from a program.
-#[inline(always)]
-pub fn log(pubkey: &Pubkey) {
-    #[cfg(target_os = "solana")]
-    unsafe {
-        crate::syscalls::sol_log_pubkey(pubkey as *const _ as *const u8)
-    };
-
-    #[cfg(not(target_os = "solana"))]
-    core::hint::black_box(pubkey);
-}
-}
 pub mod syscalls;
 pub mod sysvars;
+pub use solana_pubkey as pubkey;
 
 #[deprecated(since = "0.7.0", note = "Use the `entrypoint` module instead")]
 pub use entrypoint::lazy as lazy_entrypoint;
