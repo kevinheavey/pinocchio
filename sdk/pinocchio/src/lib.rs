@@ -234,7 +234,20 @@ pub mod program {
     pub use crate::cpi::*;
 }
 pub mod program_error;
-pub mod pubkey;
+pub mod pubkey {
+    pub use solana_pubkey::*;
+/// Log a `Pubkey` from a program.
+#[inline(always)]
+pub fn log(pubkey: &Pubkey) {
+    #[cfg(target_os = "solana")]
+    unsafe {
+        crate::syscalls::sol_log_pubkey(pubkey as *const _ as *const u8)
+    };
+
+    #[cfg(not(target_os = "solana"))]
+    core::hint::black_box(pubkey);
+}
+}
 pub mod syscalls;
 pub mod sysvars;
 

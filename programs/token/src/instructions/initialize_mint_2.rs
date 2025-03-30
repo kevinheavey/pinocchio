@@ -48,11 +48,11 @@ impl InitializeMint2<'_> {
         // Set decimals as u8 at offset [1]
         write_bytes(&mut instruction_data[1..2], &[self.decimals]);
         // Set mint_authority as Pubkey at offset [2..34]
-        write_bytes(&mut instruction_data[2..34], self.mint_authority);
+        write_bytes(&mut instruction_data[2..34], self.mint_authority.as_ref());
         // Set COption & freeze_authority at offset [34..67]
         if let Some(freeze_auth) = self.freeze_authority {
             write_bytes(&mut instruction_data[34..35], &[1]);
-            write_bytes(&mut instruction_data[35..], freeze_auth);
+            write_bytes(&mut instruction_data[35..], freeze_auth.as_ref());
         } else {
             write_bytes(&mut instruction_data[34..35], &[0]);
         }

@@ -64,7 +64,7 @@ impl CreateAccountWithSeed<'_, '_, '_> {
         // - [.. +32]: owner pubkey
         let mut instruction_data = [0; 120];
         instruction_data[0] = 3;
-        instruction_data[4..36].copy_from_slice(self.base.unwrap_or(self.from).key());
+        instruction_data[4..36].copy_from_slice(self.base.unwrap_or(self.from).key().as_ref());
         instruction_data[36..44].copy_from_slice(&u64::to_le_bytes(self.seed.len() as u64));
 
         let offset = 44 + self.seed.len();

@@ -38,5 +38,5 @@ macro_rules! declare_id {
 /// Create a `Pubkey` from a `&str`.
 #[inline(always)]
 pub const fn from_str(value: &str) -> pinocchio::pubkey::Pubkey {
-    decode_32_const(value)
+    pinocchio::pubkey::Pubkey::new_from_array(decode_32_const(value))
 }

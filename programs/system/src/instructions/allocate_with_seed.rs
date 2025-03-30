@@ -55,7 +55,7 @@ impl AllocateWithSeed<'_, '_, '_> {
         // - [.. +32]: owner pubkey
         let mut instruction_data = [0; 112];
         instruction_data[0] = 9;
-        instruction_data[4..36].copy_from_slice(self.base.key());
+        instruction_data[4..36].copy_from_slice(self.base.key().as_ref());
         instruction_data[36..44].copy_from_slice(&u64::to_le_bytes(self.seed.len() as u64));
 
         let offset = 44 + self.seed.len();

@@ -7,6 +7,9 @@ license = { workspace = true }
 readme = "./README.md"
 repository = { workspace = true }
 
+[dependencies]
+solana-pubkey = { version = "2", default-features = false }
+
 [lib]
 crate-type = ["rlib"]
 
